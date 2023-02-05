@@ -110,18 +110,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "44%",
     justifyContent: "space-evenly",
-    opacity: '75%',
+    // opacity: '75%',
   },
+  //make color choices side by side
   colors: {
     flexDirection: "row",
   },
-
-  button: {
-    fontSize: '16',
-    fontWeight: '300',
-    fontColor: '#ffffff',
-    buttonColor: '#757083',
-  },
+  //little color circles
   color: {
     borderRadius: 15,
     width: 30,
@@ -129,22 +124,24 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginRight: 22,
   },
+  //selected little color circle
   colorSelected: {
     borderStyle: "solid",
     borderWidth: 5,
     borderColor: "#5f5f5f",
-    
-  },
+    },
+    //input for user's name
   textInput: {
     height: 40, 
-    fontSize: '16',
+    fontSize: 16,
     fontWeight: '300',
     fontColor: '#757083',
-    opacity: '50%',
+    // opacity: 50%,
     borderColor: '#999999', 
     borderWidth: 1,
     color: 'black',
   },
+  //box that holds color circles
   colorBox: {
     marginTop: 10,
     width: "100%",
@@ -152,6 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginRight: 40,
   },
+  //button for next page once the user's name has been entered
   button: {
     height: 50,
     width: "50%",
@@ -164,8 +162,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginLeft: 75,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: "bold",
   }
-
-
-  
 });
