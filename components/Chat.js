@@ -16,40 +16,45 @@ export default class Chat extends React.Component {
     this.state = {
       messages: [],
       uid: 0,
-      user: {
-        _id: "",
-        name: "",
-      },
+      loggedInText: "",
+      user: {},
     };
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-      const firebaseConfig = {
-        apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
-        authDomain: "hello-world-8932e.firebaseapp.com",
-        projectId: "hello-world-8932e",
-        storageBucket: "hello-world-8932e.appspot.com",
-        messagingSenderId: "12408759444",
-        appId: "1:12408759444:web:e2121e2f62c2210a6b4081",
-      };
-    }
+    // if (!firebase.apps.length) {
+    //   firebase.initializeApp(firebaseConfig);
+    // }
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
+    //   authDomain: "hello-world-8932e.firebaseapp.com",
+    //   projectId: "hello-world-8932e",
+    //   storageBucket: "hello-world-8932e.appspot.com",
+    //   messagingSenderId: "12408759444",
+    //   appId: "1:12408759444:web:e2121e2f62c2210a6b4081",
+    // };
+
+    firebase.initializeApp({
+      apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
+      authDomain: "hello-world-8932e.firebaseapp.com",
+      projectId: "hello-world-8932e",
+      storageBucket: "hello-world-8932e.appspot.com",
+      messagingSenderId: "12408759444",
+      appId: "1:12408759444:web:e2121e2f62c2210a6b4081",
+    });
+
     this.referenceChatMessages = firebase.firestore().collection("messages");
+    // .where("uid", "==", this.state.uid);
   }
 
   componentDidMount() {
     let name = this.props.route.params.name;
     this.props.navigation.setOptions({ title: name });
-    this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    this.referenceChatMessages = firebase.firestore().collection("messages");
+    this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
       if (!user) {
-        firebase.auth().signInAnonymously();
+        await firebase.auth().signInAnonymously();
       }
       this.setState({
         uid: user.uid,
-        messages: [],
-        user: {
-          _id: user.uid,
-          name: name,
-        },
-        loggedInText: "",
+        loggedInText: "Hello There",
       });
       this.unsubscribe = this.referenceChatMessages
         .orderBy("createdAt", "desc")
@@ -144,3 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 });
+
+// run it with expo check the errors
+// somethign with uid
+// keep checkin other codes i guess
