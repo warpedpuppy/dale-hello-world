@@ -192,7 +192,7 @@ export default class Chat extends React.Component {
     );
   }
   
-  renderInputToolbar(props) {
+  renderInputToolbar = (props) => {
     if (this.state.isConnected == false) {
 		return <Text>app not connected to internet!</Text>;
     } else {
@@ -205,7 +205,7 @@ export default class Chat extends React.Component {
       <View style={[styles.container, { backgroundColor }]}>
         <Text>{this.state.loggedInText}</Text>
         <GiftedChat
-		renderInputToolbar={this.renderInputToolbar.bind(this)}
+		  renderInputToolbar={ this.renderInputToolbar }
           renderBubble={this.renderBubble.bind(this)}
           messages={this.state.messages}
           onSend={(messages) => this.onSend(messages)}
