@@ -1,5 +1,5 @@
 import React from "react";
-import { Bubble, GiftedChat } from "react-native-gifted-chat";
+import { Bubble, GiftedChat, InputToolbar } from "react-native-gifted-chat";
 import {
   StyleSheet,
   View,
@@ -37,7 +37,7 @@ export default class Chat extends React.Component {
     // };
     if (!firebase.apps.length) {
       firebase.initializeApp({
-        apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
+		apiKey: "AIzaSyAHi1wCLcVwD4N1vLC59MThCugZaytXT9Q",
         authDomain: "hello-world-8932e.firebaseapp.com",
         projectId: "hello-world-8932e",
         storageBucket: "hello-world-8932e.appspot.com",
@@ -63,6 +63,7 @@ export default class Chat extends React.Component {
 
   //
   componentDidMount() {
+	console.log('component did mount', Math.random()*1000)
     //sets user's name is header
     let name = this.props.route.params.name;
     this.props.navigation.setOptions({ title: name });
@@ -190,8 +191,10 @@ export default class Chat extends React.Component {
       />
     );
   }
+  
   renderInputToolbar(props) {
     if (this.state.isConnected == false) {
+		return <Text>app not connected to internet!</Text>;
     } else {
       return <InputToolbar {...props} />;
     }
@@ -202,6 +205,7 @@ export default class Chat extends React.Component {
       <View style={[styles.container, { backgroundColor }]}>
         <Text>{this.state.loggedInText}</Text>
         <GiftedChat
+		renderInputToolbar={this.renderInputToolbar.bind(this)}
           renderBubble={this.renderBubble.bind(this)}
           messages={this.state.messages}
           onSend={(messages) => this.onSend(messages)}
